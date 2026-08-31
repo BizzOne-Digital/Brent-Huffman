@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Huffman Heating & Air Conditioning
+
+Full-stack Next.js website with MongoDB CMS admin panel for Huffman Heating & Air Conditioning.
+
+## Tech Stack
+
+- **Frontend & Backend:** Next.js 16 (App Router)
+- **Database:** MongoDB Atlas
+- **Styling:** Tailwind CSS 4
+- **Animations:** Framer Motion
+- **Auth:** JWT (httpOnly cookies)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+cd huffman-heating
+npm install
+```
+
+### 2. Configure environment
+
+Copy `.env.example` to `.env.local` and update:
+
+```env
+MONGODB_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/huffman-heating
+ADMIN_EMAIL=admin@huffmanheating.net
+ADMIN_PASSWORD=HuffmanAdmin2026!
+JWT_SECRET=your-super-secret-jwt-key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+### 3. Seed the database
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then visit: `http://localhost:3000/api/seed` (POST request)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Or run in browser console:
+```js
+fetch('/api/seed', { method: 'POST' }).then(r => r.json()).then(console.log)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Run development server
 
-## Learn More
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+- **Website:** http://localhost:3000
+- **Admin Panel:** http://localhost:3000/admin/login
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Admin Login
+- Email: `admin@huffmanheating.net`
+- Password: `HuffmanAdmin2026!`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pages
 
-## Deploy on Vercel
+| Page | URL |
+|------|-----|
+| Home | `/` |
+| About Us | `/about` |
+| Services | `/services` |
+| Service Detail | `/services/[slug]` |
+| Gallery | `/gallery` |
+| Our Team | `/team` |
+| Testimonials | `/testimonials` |
+| FAQs | `/faqs` |
+| Contact | `/contact` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Admin Panel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Access at `/admin/login` with sidebar navigation:
+
+- **Dashboard** — Site stats and recent leads
+- **Pages** — Edit all page content section-by-section with images
+- **Services** — Add/edit/delete services with listing + detail page tabs
+- **Gallery** — Manage categories and images
+- **Testimonials** — Add/edit customer reviews
+- **FAQs** — Manage questions and answers
+- **Settings** — Contact info, social links, special offers (updates footer & contact page)
+
+## Image Uploads
+
+Images are stored in MongoDB (not local disk) — works on Vercel/serverless:
+
+- Upload via admin panel → stored in `StoredUpload` collection
+- Served at `/api/uploads/[folder]/[filename]`
+- Folders: `products`, `gallery`, `pages`, `misc`
+
+## Adding Your Images
+
+Place service images in `public/images/services/` and gallery images in `public/images/gallery/`, then upload via admin panel or reference paths directly.
+
+For videos on homepage, edit the Home page in admin → `video` section → set video URL in extra field.
+
+## Deploy to Vercel
+
+1. Push to GitHub
+2. Import in Vercel
+3. Add environment variables from `.env.local`
+4. Deploy
+5. Run seed endpoint once after deploy
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── (public)/          # Public website pages
+│   ├── admin/             # Admin CMS panel
+│   └── api/               # API routes
+├── components/
+│   ├── admin/             # Admin components
+│   ├── layout/            # Header, Footer, Intro
+│   └── ui/                # Reusable UI components
+├── lib/                   # Utilities, auth, upload
+└── models/                # Mongoose models
+```

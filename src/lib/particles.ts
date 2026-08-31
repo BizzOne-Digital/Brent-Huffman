@@ -1,0 +1,38 @@
+// Fixed particle configs — deterministic to avoid hydration mismatch
+export const SPLASH_PARTICLES = [
+  { left: "12%", top: "18%", duration: 2.4, delay: 0.2 },
+  { left: "28%", top: "72%", duration: 3.1, delay: 0.8 },
+  { left: "45%", top: "35%", duration: 2.8, delay: 1.2 },
+  { left: "62%", top: "58%", duration: 3.5, delay: 0.4 },
+  { left: "78%", top: "22%", duration: 2.6, delay: 1.6 },
+  { left: "88%", top: "68%", duration: 3.2, delay: 0.6 },
+  { left: "22%", top: "45%", duration: 2.9, delay: 1.0 },
+  { left: "55%", top: "82%", duration: 3.4, delay: 1.4 },
+  { left: "72%", top: "48%", duration: 2.5, delay: 0.3 },
+  { left: "38%", top: "12%", duration: 3.0, delay: 1.8 },
+  { left: "92%", top: "38%", duration: 2.7, delay: 0.9 },
+  { left: "8%", top: "88%", duration: 3.3, delay: 1.1 },
+] as const;
+
+export const OFFER_PARTICLES = [
+  { left: "10%", top: "20%" },
+  { left: "25%", top: "75%" },
+  { left: "40%", top: "35%" },
+  { left: "55%", top: "60%" },
+  { left: "70%", top: "15%" },
+  { left: "85%", top: "80%" },
+  { left: "15%", top: "50%" },
+  { left: "50%", top: "90%" },
+  { left: "65%", top: "30%" },
+  { left: "80%", top: "55%" },
+  { left: "30%", top: "10%" },
+  { left: "95%", top: "40%" },
+  { left: "5%", top: "65%" },
+  { left: "48%", top: "5%" },
+  { left: "72%", top: "92%" },
+  { left: "20%", top: "38%" },
+  { left: "58%", top: "72%" },
+  { left: "88%", top: "18%" },
+  { left: "35%", top: "58%" },
+  { left: "62%", top: "42%" },
+] as const;
