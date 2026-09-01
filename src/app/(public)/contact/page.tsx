@@ -12,7 +12,17 @@ async function getContactData() {
     ]);
     return {
       page: page ? JSON.parse(JSON.stringify(page)) : null,
-      settings: settings ? JSON.parse(JSON.stringify(settings)) : null,
+      settings: settings
+        ? {
+            ...JSON.parse(JSON.stringify(settings)),
+            email: settings.email?.trim().toLowerCase(),
+            serviceAreas: (() => {
+              const areas = [...(settings.serviceAreas || [])];
+              if (!areas.includes("Claremont, NC")) areas.push("Claremont, NC");
+              return areas;
+            })(),
+          }
+        : null,
     };
   } catch {
     return { page: null, settings: null };

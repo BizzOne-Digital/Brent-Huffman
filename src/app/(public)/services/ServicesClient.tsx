@@ -39,14 +39,14 @@ export default function ServicesClient({
         content={hero?.content}
         image={hero?.image}
       >
-        <Button href="/contact" variant="outline">Get Free Estimate</Button>
+        <Button href="/contact" variant="outline">Request Install Estimate</Button>
       </HeroSection>
 
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <FadeIn className="text-center mb-16">
             <p className="text-gray-500 text-lg">
-              Contact us for pricing — we provide personalized quotes for every job.
+              Free estimates on replacements and new installations. Repairs are quoted at time of service.
             </p>
           </FadeIn>
 
@@ -97,7 +97,7 @@ export default function ServicesClient({
       <section className="py-12 sm:py-16 gradient-red-blue text-center text-white px-4 sm:px-6">
         <FadeIn>
           <h2 className="text-2xl sm:text-3xl font-black mb-4">Need a Custom Solution?</h2>
-          <p className="text-white/90 mb-8">Call us for a free estimate on any HVAC project</p>
+          <p className="text-white/90 mb-8">Call us for a free estimate on replacements and new installs</p>
           <Button href="tel:8282562675" variant="outline">
             <Phone size={18} />
             828-256-2675

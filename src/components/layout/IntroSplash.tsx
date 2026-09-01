@@ -74,7 +74,7 @@ export default function IntroSplash() {
             transition={{ duration: 0.8, ease: [0.175, 0.885, 0.32, 1.275] }}
           >
             <motion.div
-              className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-6"
+              className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 mx-auto mb-6"
               animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >

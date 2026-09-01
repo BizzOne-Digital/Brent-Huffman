@@ -6,6 +6,7 @@ import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import HeroSection from "@/components/ui/HeroSection";
 import FadeIn from "@/components/ui/FadeIn";
 import Button from "@/components/ui/Button";
+import GoogleReviewBlock from "@/components/ui/GoogleReviewBlock";
 import { PageSection } from "@/lib/types";
 
 function getSection(sections: PageSection[], key: string) {
@@ -133,11 +134,19 @@ export default function TestimonialsClient({
         </div>
       </section>
 
-      <section className="py-16 gradient-red-blue text-center">
-        <FadeIn>
-          <h2 className="text-3xl font-black text-white mb-4">Join Our Happy Customers</h2>
-          <Button href="/contact" variant="outline">Get Your Free Estimate</Button>
-        </FadeIn>
+      <section className="py-16 gradient-red-blue">
+        <div className="max-w-4xl mx-auto px-6">
+          <FadeIn className="text-center">
+            <h2 className="text-3xl font-black text-white mb-2">Join Our Happy Customers</h2>
+            <p className="text-white/85 mb-8">Had a great experience? We&apos;d love to hear from you.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+              <GoogleReviewBlock />
+              <Button href="/contact" variant="outline">
+                Contact Us
+              </Button>
+            </div>
+          </FadeIn>
+        </div>
       </section>
     </>
   );

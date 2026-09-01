@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Share2, Clock } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
+import GoogleReviewBlock, { DEFAULT_GOOGLE_REVIEW_URL } from "@/components/ui/GoogleReviewBlock";
 
 interface FooterProps {
   settings?: {
@@ -13,7 +14,7 @@ interface FooterProps {
     phone?: string;
     address?: string;
     serviceAreas?: string[];
-    socialLinks?: { facebook?: string };
+    socialLinks?: { facebook?: string; googleReview?: string };
     footerText?: string;
     hours?: string;
     specialOffers?: {
@@ -26,9 +27,11 @@ interface FooterProps {
 
 export default function Footer({ settings }: FooterProps) {
   const phone = settings?.phone || "828-256-2675";
-  const email = settings?.email || "Brentuffman@huffmanheating.net";
+  const email = (settings?.email || "brentuffman@huffmanheating.net").toLowerCase();
   const businessName = settings?.businessName || "Huffman Heating & Air Conditioning";
-  const facebook = settings?.socialLinks?.facebook || "https://www.facebook.com/share/1LDwdhx9tv/";
+  const facebook = settings?.socialLinks?.facebook || "https://www.facebook.com/share/1C3vvLwWrV/";
+  const googleReviewUrl =
+    settings?.socialLinks?.googleReview || DEFAULT_GOOGLE_REVIEW_URL;
 
   const quickLinks = [
     { href: "/", label: "Home" },
@@ -75,11 +78,17 @@ export default function Footer({ settings }: FooterProps) {
                 href={facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white font-semibold text-sm transition-colors shadow-md"
+                aria-label="Follow us on Facebook"
               >
-                <Share2 size={20} />
-                <span className="text-sm">Follow us on Facebook</span>
+                <Share2 size={18} />
+                <span>Follow us on Facebook</span>
               </a>
+              <GoogleReviewBlock
+                variant="dark"
+                className="mt-6 items-start text-left"
+                reviewUrl={googleReviewUrl}
+              />
             </div>
           </FadeIn>
 
@@ -125,7 +134,7 @@ export default function Footer({ settings }: FooterProps) {
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin size={16} className="text-huffman-red flex-shrink-0 mt-0.5" />
-                {settings?.address || "Conover, North Carolina"}
+                {settings?.address || "Newton, North Carolina"}
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <Clock size={16} className="text-huffman-blue flex-shrink-0 mt-0.5" />
@@ -145,6 +154,7 @@ export default function Footer({ settings }: FooterProps) {
                 "Maiden, NC",
                 "Taylorsville, NC",
                 "Hickory, NC",
+                "Claremont, NC",
               ]).map((area) => (
                 <li key={area} className="text-gray-400 text-sm flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-huffman-red" />
@@ -167,7 +177,7 @@ export default function Footer({ settings }: FooterProps) {
               href="/contact"
               className="text-sm font-semibold shimmer-btn px-6 py-2 rounded-full text-white"
             >
-              Get Free Estimate
+              Get Free Install Estimate
             </Link>
           </motion.div>
         </div>

@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Heart, Award, Play } from "lucide-react";
+import { Calendar, MapPin, Heart, Award, Play, Info } from "lucide-react";
 import HeroSection from "@/components/ui/HeroSection";
 import FadeIn from "@/components/ui/FadeIn";
 import Button from "@/components/ui/Button";
 import SafeImage from "@/components/ui/SafeImage";
+import { aboutExtraVideos, helpfulInfoVideos } from "@/lib/seed-data";
 import { PageSection } from "@/lib/types";
 
 function getSection(sections: PageSection[], key: string) {
@@ -17,11 +18,18 @@ export default function AboutClient({ page }: { page: { sections: PageSection[] 
   const hero = getSection(sections, "hero");
   const story = getSection(sections, "story");
   const video = getSection(sections, "video");
+  const helpfulVideosSection = getSection(sections, "helpful-videos");
   const serviceArea = getSection(sections, "service-area");
 
   const storyImage = story?.image || "/images/about-family.png";
   const videoUrl =
     (video?.extra as { videoUrl?: string })?.videoUrl || "/videos/about-video.mp4";
+  const extraVideos =
+    (video?.extra as { extraVideos?: string[] })?.extraVideos?.filter(Boolean) ||
+    [...aboutExtraVideos];
+  const helpfulVideos =
+    (helpfulVideosSection?.extra as { videos?: string[] })?.videos?.filter(Boolean) ||
+    [...helpfulInfoVideos];
 
   const milestones = [
     { year: "1962", event: "Fred D. Huffman founds the company" },
@@ -126,8 +134,66 @@ export default function AboutClient({ page }: { page: { sections: PageSection[] 
               </video>
             </div>
           </FadeIn>
+
+          {extraVideos.length > 0 && (
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 mt-8 sm:mt-10 max-w-xl mx-auto">
+              {extraVideos.map((src, i) => (
+                <FadeIn key={src} delay={0.2 + i * 0.08}>
+                  <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black aspect-video">
+                    <video
+                      src={src}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-contain bg-black"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          )}
         </div>
       </section>
+
+      {/* Helpful videos & information */}
+      {helpfulVideos.length > 0 && (
+        <section className="section-padding bg-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <FadeIn className="text-center mb-8 sm:mb-12">
+              <span className="inline-flex items-center gap-2 text-huffman-blue font-bold text-sm tracking-widest uppercase mb-3">
+                <Info size={16} />
+                {helpfulVideosSection?.subtitle || "Tips From Huffman Heating"}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black text-huffman-dark mt-2 mb-4">
+                {helpfulVideosSection?.title || "Helpful Videos & Information"}
+              </h2>
+              <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+                {helpfulVideosSection?.content ||
+                  "Short videos with helpful information about your heating and air conditioning system."}
+              </p>
+            </FadeIn>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+              {helpfulVideos.map((src, i) => (
+                <FadeIn key={src} delay={0.1 + i * 0.08}>
+                  <div className="relative rounded-2xl overflow-hidden shadow-lg bg-black aspect-video">
+                    <video
+                      src={src}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-contain bg-black"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -175,14 +241,14 @@ export default function AboutClient({ page }: { page: { sections: PageSection[] 
               {serviceArea?.content}
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              {["Catawba County", "Conover, NC", "Newton, NC", "Maiden, NC", "Taylorsville, NC", "Hickory, NC"].map((area) => (
+              {["Catawba County", "Conover, NC", "Newton, NC", "Maiden, NC", "Taylorsville, NC", "Hickory, NC", "Claremont, NC"].map((area) => (
                 <span key={area} className="px-4 py-2 rounded-full bg-white text-huffman-dark font-semibold text-sm">
                   {area}
                 </span>
               ))}
             </div>
             <div className="mt-12">
-              <Button href="/contact" variant="primary">Get Free Estimate</Button>
+              <Button href="/contact" variant="primary">Request Install Estimate</Button>
             </div>
           </FadeIn>
         </div>

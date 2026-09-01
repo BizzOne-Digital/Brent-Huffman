@@ -26,6 +26,8 @@ export default function SafeImage({
 }: SafeImageProps) {
   const imageSrc = getImageUrl(src || "/images/placeholder.svg");
   const isUpload = imageSrc.startsWith("/api/uploads/");
+  const isStaticGallery = imageSrc.startsWith("/gallery/");
+  const unoptimized = isUpload || isStaticGallery;
 
   if (fill) {
     return (
@@ -37,7 +39,7 @@ export default function SafeImage({
         className={className}
         priority={priority}
         sizes={sizes || "100vw"}
-        unoptimized={isUpload}
+        unoptimized={unoptimized}
         onError={(e) => {
           (e.target as HTMLImageElement).src = "/images/placeholder.svg";
         }}
@@ -54,7 +56,7 @@ export default function SafeImage({
       height={height || 300}
       className={className}
       priority={priority}
-      unoptimized={isUpload}
+      unoptimized={unoptimized}
       onError={(e) => {
         (e.target as HTMLImageElement).src = "/images/placeholder.svg";
       }}

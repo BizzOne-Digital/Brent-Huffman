@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import HeroSection from "@/components/ui/HeroSection";
 import FadeIn from "@/components/ui/FadeIn";
 import Button from "@/components/ui/Button";
+import GoogleReviewBlock, { DEFAULT_GOOGLE_REVIEW_URL } from "@/components/ui/GoogleReviewBlock";
 import { PageSection } from "@/lib/types";
 
 function getSection(sections: PageSection[], key: string) {
@@ -24,11 +25,14 @@ export default function ContactClient({
     address?: string;
     hours?: string;
     serviceAreas?: string[];
+    socialLinks?: { googleReview?: string };
   } | null;
 }) {
   const hero = getSection(page?.sections || [], "hero");
   const phone = settings?.phone || "828-256-2675";
-  const email = settings?.email || "Brentuffman@huffmanheating.net";
+  const email = (settings?.email || "brentuffman@huffmanheating.net").toLowerCase();
+  const googleReviewUrl =
+    settings?.socialLinks?.googleReview || DEFAULT_GOOGLE_REVIEW_URL;
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", service: "" });
   const [loading, setLoading] = useState(false);
@@ -85,7 +89,7 @@ export default function ContactClient({
     <>
       <HeroSection
         title={hero?.title || "Contact Us"}
-        subtitle={hero?.subtitle || "Get Your Free Estimate Today"}
+        subtitle={hero?.subtitle || "Contact Us Today"}
         content={hero?.content}
         image={hero?.image}
       />
@@ -170,7 +174,7 @@ export default function ContactClient({
                     <MapPin className="text-huffman-red flex-shrink-0 mt-1" size={20} />
                     <div>
                       <p className="font-semibold text-huffman-dark">Location</p>
-                      <p className="text-gray-500">{settings?.address || "Conover, North Carolina"}</p>
+                      <p className="text-gray-500">{settings?.address || "Newton, North Carolina"}</p>
                     </div>
                   </div>
                   <div>
@@ -190,9 +194,10 @@ export default function ContactClient({
                     </p>
                   </div>
                   <div className="p-4 gradient-red-blue rounded-xl text-white text-center">
-                    <p className="font-bold text-lg">Free Estimates!</p>
-                    <p className="text-white/80 text-sm mt-1">No obligation — contact us today</p>
+                    <p className="font-bold text-lg">Free Estimates on Replacements &amp; New Installs</p>
+                    <p className="text-white/80 text-sm mt-1">Repairs are quoted at time of service — contact us today</p>
                   </div>
+                  <GoogleReviewBlock className="pt-2" reviewUrl={googleReviewUrl} />
                 </div>
               </div>
             </FadeIn>

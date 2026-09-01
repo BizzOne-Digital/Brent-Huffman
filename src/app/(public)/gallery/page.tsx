@@ -6,6 +6,46 @@ import { defaultGalleryCategories } from "@/lib/seed-data";
 
 export const dynamic = "force-dynamic";
 
+type GalleryCategoryData = {
+  _id?: string;
+  name: string;
+  slug: string;
+  description: string;
+  order: number;
+  images: { url: string; caption?: string; order: number }[];
+};
+
+function mergeGalleryCategories(
+  dbCategories: GalleryCategoryData[],
+  defaults: typeof defaultGalleryCategories
+): GalleryCategoryData[] {
+  const merged =
+    dbCategories.length > 0
+      ? dbCategories.map((c) => ({ ...c }))
+      : defaults.map((c) => ({ ...c }));
+
+  for (const def of defaults) {
+    const idx = merged.findIndex((c) => c.slug === def.slug);
+    if (idx === -1) {
+      merged.push({ ...def });
+      continue;
+    }
+    const dbImageCount = merged[idx].images?.length ?? 0;
+    const defaultImageCount = def.images?.length ?? 0;
+    if (defaultImageCount > dbImageCount) {
+      merged[idx] = {
+        ...merged[idx],
+        name: def.name,
+        description: def.description,
+        order: def.order,
+        images: def.images,
+      };
+    }
+  }
+
+  return merged.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
 async function getGalleryData() {
   try {
     await connectDB();
@@ -22,9 +62,14 @@ async function getGalleryData() {
       (c: { images?: { url: string }[] }) => (c.images?.length ?? 0) > 0
     );
 
+    const categoriesOut =
+      hasMedia && hasCompletedInstalls
+        ? mergeGalleryCategories(dbCategories, defaultGalleryCategories)
+        : defaultGalleryCategories;
+
     return {
       page: page ? JSON.parse(JSON.stringify(page)) : null,
-      categories: hasMedia && hasCompletedInstalls ? dbCategories : defaultGalleryCategories,
+      categories: categoriesOut,
     };
   } catch {
     return { page: null, categories: defaultGalleryCategories };

@@ -37,8 +37,8 @@ interface RelatedService {
   icon: string;
 }
 
-const PROCESS_STEPS = [
-  { step: "01", title: "Free Estimate", desc: "Contact us for a no-obligation quote tailored to your needs." },
+const INSTALL_PROCESS_STEPS = [
+  { step: "01", title: "Free Install Estimate", desc: "Contact us for a no-obligation quote on replacements and new installations." },
   { step: "02", title: "Expert Assessment", desc: "We evaluate your space and recommend the best solution." },
   { step: "03", title: "Professional Install", desc: "Our skilled team completes the job with quality craftsmanship." },
   { step: "04", title: "Ongoing Support", desc: "We stand behind our work with reliable service and support." },
@@ -59,6 +59,7 @@ export default function ServiceDetailClient({
 }) {
   const heroImage = getHeroImage(service.mainImage);
   const sections = [...(service.detailSections || [])].sort((a, b) => a.order - b.order);
+  const isInstallService = service.slug !== "system-troubles";
 
   return (
     <>
@@ -117,7 +118,7 @@ export default function ServiceDetailClient({
                   className="inline-flex items-center gap-2 px-7 py-3.5 bg-huffman-red hover:bg-huffman-red-dark text-white font-bold text-sm rounded-full transition-all shadow-lg"
                 >
                   <Calendar size={17} />
-                  Get Free Estimate
+                  {isInstallService ? "Free Install Estimate" : "Schedule Service"}
                 </Link>
                 <a
                   href="tel:8282562675"
@@ -140,7 +141,7 @@ export default function ServiceDetailClient({
                 { icon: Shield, label: "Licensed & Insured" },
                 { icon: Award, label: "60+ Years Experience" },
                 { icon: Wrench, label: "Quality Craftsmanship" },
-                { icon: CheckCircle, label: "Free Estimates" },
+                { icon: CheckCircle, label: isInstallService ? "Free Install Estimates" : "Expert Diagnostics" },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -164,7 +165,7 @@ export default function ServiceDetailClient({
               { icon: Shield, label: "Licensed & Insured" },
               { icon: Award, label: "60+ Years Experience" },
               { icon: Wrench, label: "Quality Craftsmanship" },
-              { icon: CheckCircle, label: "Free Estimates" },
+              { icon: CheckCircle, label: isInstallService ? "Free Install Estimates" : "Expert Diagnostics" },
             ].map((item) => (
               <div
                 key={item.label}
@@ -264,21 +265,25 @@ export default function ServiceDetailClient({
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
                 {service.shortDescription} Huffman Heating &amp; Air Conditioning has been delivering
-                quality work at reasonable prices since 1962. Contact us today for a free estimate.
+                quality work at reasonable prices since 1962.{" "}
+                {isInstallService
+                  ? "Contact us today for a free estimate on replacements and new installations."
+                  : "Contact us to schedule service — repair pricing is provided at time of service."}
               </p>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-huffman-red text-white font-bold rounded-full hover:bg-huffman-red-dark transition-colors"
               >
                 <Calendar size={17} />
-                Schedule a Free Estimate
+                {isInstallService ? "Request Free Install Estimate" : "Schedule Service"}
               </Link>
             </FadeIn>
           </div>
         </section>
       )}
 
-      {/* How it works */}
+      {/* How it works — installs only */}
+      {isInstallService && (
       <section className="py-20 sm:py-24 bg-huffman-dark relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-huffman-red blur-3xl" />
@@ -294,7 +299,7 @@ export default function ServiceDetailClient({
             </h2>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PROCESS_STEPS.map((item, i) => (
+            {INSTALL_PROCESS_STEPS.map((item, i) => (
               <FadeIn key={item.step} delay={i * 0.1}>
                 <div className="relative bg-white/5 border border-white/10 rounded-2xl p-6 h-full hover:bg-white/10 transition-colors group">
                   <span className="text-5xl font-black text-white/10 group-hover:text-huffman-red/30 transition-colors absolute top-4 right-4">
@@ -311,6 +316,7 @@ export default function ServiceDetailClient({
           </div>
         </div>
       </section>
+      )}
 
       {/* Why Huffman */}
       <section className="py-20 bg-white">
@@ -330,9 +336,9 @@ export default function ServiceDetailClient({
               </p>
               <ul className="space-y-4">
                 {[
-                  "Free estimates on all services",
+                  "Free estimates on replacements — we do not offer free estimates on service or repair",
                   "Special discounts for seniors, military & law enforcement",
-                  "Residential and commercial expertise",
+                  "Residential and light commercial expertise",
                   "All metal ductwork specialists",
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-3">
@@ -419,7 +425,9 @@ export default function ServiceDetailClient({
               Ready for {service.title}?
             </h2>
             <p className="text-white/85 text-lg mb-10">
-              Contact Huffman Heating &amp; Air for a free, no-obligation estimate today.
+              {isInstallService
+                ? "Contact Huffman Heating & Air for a free estimate on replacements and new installations."
+                : "Contact Huffman Heating & Air to schedule service. Repair estimates are provided at time of service."}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -427,7 +435,7 @@ export default function ServiceDetailClient({
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-huffman-red font-bold rounded-full hover:bg-gray-100 transition-colors shadow-xl"
               >
                 <Calendar size={18} />
-                Schedule Service
+                {isInstallService ? "Request Install Estimate" : "Schedule Service"}
               </Link>
               <a
                 href="tel:8282562675"

@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: "Huffman Heating & Air Conditioning | Since 1962",
   description:
-    "Family-owned HVAC company serving Catawba County, NC since 1962. Heating, cooling, heat pumps, and metal ductwork. Free estimates.",
+    "Family-owned HVAC company serving Catawba County, NC since 1962. Heating, cooling, heat pumps, and metal ductwork. Free estimates on replacements and new installs.",
   keywords: "HVAC, heating, air conditioning, Conover NC, Newton NC, Hickory NC",
 };
 

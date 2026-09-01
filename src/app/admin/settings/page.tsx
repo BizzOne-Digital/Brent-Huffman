@@ -12,7 +12,7 @@ interface Settings {
   phone: string;
   address: string;
   serviceAreas: string[];
-  socialLinks: { facebook: string; facebookReel: string; facebookPost: string };
+  socialLinks: { facebook: string; facebookReel: string; facebookPost: string; googleReview: string };
   specialOffers: { seniors: string; lawEnforcement: string; military: string };
   footerText: string;
   hours: string;
@@ -120,6 +120,7 @@ export default function AdminSettings() {
               { key: "facebook", label: "Facebook Page" },
               { key: "facebookReel", label: "Facebook Reel" },
               { key: "facebookPost", label: "Facebook Post" },
+              { key: "googleReview", label: "Google Review Link" },
             ].map((field) => (
               <div key={field.key}>
                 <label className="admin-label">{field.label}</label>

@@ -34,6 +34,32 @@ export async function POST() {
     const settingsCount = await SiteSettings.countDocuments();
     if (settingsCount === 0) {
       await SiteSettings.create({});
+    } else {
+      await SiteSettings.updateMany(
+        { email: { $regex: /brentuffman@huffmanheating\.net/i } },
+        { $set: { email: "brentuffman@huffmanheating.net" } }
+      );
+      await SiteSettings.updateMany(
+        { address: { $in: ["Conover, North Carolina", "Conover, NC"] } },
+        { $set: { address: "Newton, North Carolina" } }
+      );
+      await FAQ.deleteMany({ question: "Do you provide emergency service?" });
+      await SiteSettings.updateMany({}, { $addToSet: { serviceAreas: "Claremont, NC" } });
+      await SiteSettings.updateMany(
+        { "socialLinks.googleReview": { $exists: false } },
+        { $set: { "socialLinks.googleReview": "https://g.page/r/Cf1yypINidZQEBM/review" } }
+      );
+      await SiteSettings.updateMany(
+        {
+          "socialLinks.facebook": {
+            $in: [
+              "https://www.facebook.com/share/1LDwdhx9tv/",
+              "https://www.facebook.com/profile.php?id=100063787920305",
+            ],
+          },
+        },
+        { $set: { "socialLinks.facebook": "https://www.facebook.com/share/1C3vvLwWrV/" } }
+      );
     }
 
     for (const page of defaultPages) {
@@ -89,7 +115,7 @@ export async function POST() {
     for (const faq of defaultFAQs) {
       await FAQ.findOneAndUpdate(
         { question: faq.question },
-        { $setOnInsert: { ...faq, isActive: true } },
+        { $set: { answer: faq.answer, order: faq.order, isActive: true } },
         { upsert: true, new: true }
       );
     }

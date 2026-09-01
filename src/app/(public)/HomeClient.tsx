@@ -46,7 +46,7 @@ export default function HomeClient({ page, services, settings }: HomeClientProps
     { icon: Award, value: "60+", label: "Years Experience" },
     { icon: Users, value: "3", label: "Generations" },
     { icon: Shield, value: "100%", label: "Satisfaction" },
-    { icon: Wrench, value: "Free", label: "Estimates" },
+    { icon: Wrench, value: "Free", label: "Install Estimates" },
   ];
 
   return (
@@ -185,7 +185,7 @@ export default function HomeClient({ page, services, settings }: HomeClientProps
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
                 {intro?.content ||
-                  "From gas and oil furnaces to heat pumps and all-metal ductwork — we specialize in residential and commercial heating and cooling solutions."}
+                  "From gas and oil furnaces to heat pumps and all-metal ductwork — we specialize in residential and light commercial heating and cooling solutions."}
               </p>
               <Button href="/about" variant="secondary">
                 Our Story
@@ -349,7 +349,7 @@ export default function HomeClient({ page, services, settings }: HomeClientProps
               {cta?.title || "Ready for Comfort?"}
             </h2>
             <p className="text-gray-400 text-base sm:text-xl mb-8">
-              {cta?.content || "Contact us today for a free estimate. No online pricing — personalized service."}
+              {cta?.content || "Free estimates on replacements and new installations. Repairs are quoted at time of service."}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button href="/contact" variant="primary">

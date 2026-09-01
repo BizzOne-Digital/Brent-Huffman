@@ -11,7 +11,14 @@ async function getSettings() {
     await connectDB();
     let settings = await SiteSettings.findOne().lean();
     if (!settings) settings = await SiteSettings.create({});
-    return JSON.parse(JSON.stringify(settings));
+    const normalized = JSON.parse(JSON.stringify(settings));
+    if (normalized?.email) {
+      normalized.email = normalized.email.trim().toLowerCase();
+    }
+    if (normalized?.serviceAreas && !normalized.serviceAreas.includes("Claremont, NC")) {
+      normalized.serviceAreas = [...normalized.serviceAreas, "Claremont, NC"];
+    }
+    return normalized;
   } catch {
     return null;
   }

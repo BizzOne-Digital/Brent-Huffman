@@ -27,6 +27,9 @@ export async function PUT(request: NextRequest) {
 
   try {
     const body = await request.json();
+    if (typeof body.email === "string") {
+      body.email = body.email.trim().toLowerCase();
+    }
     await connectDB();
     const settings = await SiteSettings.findOneAndUpdate({}, body, {
       new: true,

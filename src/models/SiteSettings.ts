@@ -19,9 +19,13 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
   {
     businessName: { type: String, default: "Huffman Heating & Air Conditioning" },
     tagline: { type: String, default: "Quality Heating & Cooling Since 1962" },
-    email: { type: String, default: "Brentuffman@huffmanheating.net" },
+    email: {
+      type: String,
+      default: "brentuffman@huffmanheating.net",
+      set: (value: string) => (value ? value.trim().toLowerCase() : value),
+    },
     phone: { type: String, default: "828-256-2675" },
-    address: { type: String, default: "Conover, North Carolina" },
+    address: { type: String, default: "Newton, North Carolina" },
     serviceAreas: {
       type: [String],
       default: [
@@ -31,12 +35,17 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
         "Maiden, NC",
         "Taylorsville, NC",
         "Hickory, NC",
+        "Claremont, NC",
       ],
     },
     socialLinks: {
-      facebook: { type: String, default: "https://www.facebook.com/share/1LDwdhx9tv/" },
+      facebook: { type: String, default: "https://www.facebook.com/share/1C3vvLwWrV/" },
       facebookReel: { type: String, default: "https://www.facebook.com/reel/4538622503052429" },
       facebookPost: { type: String, default: "https://www.facebook.com/share/r/19VeRUK7BP/" },
+      googleReview: {
+        type: String,
+        default: "https://g.page/r/Cf1yypINidZQEBM/review",
+      },
     },
     specialOffers: {
       seniors: { type: String, default: "Special discount for senior citizens" },

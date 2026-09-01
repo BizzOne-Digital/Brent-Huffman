@@ -26,6 +26,7 @@ export interface SocialLinks {
   facebook?: string;
   facebookReel?: string;
   facebookPost?: string;
+  googleReview?: string;
 }
 
 export interface SpecialOffers {

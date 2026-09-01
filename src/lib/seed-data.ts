@@ -13,6 +13,14 @@ export function getImageUrl(path: string) {
   return path.startsWith("/") ? path : `/${path}`;
 }
 
+export const aboutExtraVideos = ["/videos/video-1.mp4"] as const;
+
+export const helpfulInfoVideos = [
+  "/videos/video-2.mp4",
+  "/videos/video-3.mp4",
+  "/videos/video-4.mp4",
+] as const;
+
 export const defaultPages: { slug: string; title: string; sections: PageSection[] }[] = [
   {
     slug: "home",
@@ -33,7 +41,7 @@ export const defaultPages: { slug: string; title: string; sections: PageSection[
         title: "Trusted HVAC Experts",
         subtitle: "Serving Our Community Since 1962",
         content:
-          "From gas and oil furnaces to heat pumps and all-metal ductwork — we specialize in residential and commercial heating and cooling solutions you can count on.",
+          "From gas and oil furnaces to heat pumps and all-metal ductwork — we specialize in residential and light commercial heating and cooling solutions you can count on.",
         image: "",
         order: 1,
       },
@@ -58,7 +66,7 @@ export const defaultPages: { slug: string; title: string; sections: PageSection[
         key: "cta",
         title: "Ready for Comfort?",
         subtitle: "Contact Us Today",
-        content: "Call for a free estimate. No pricing online — contact us for personalized service.",
+        content: "Free estimates on replacements and new installations. Repairs are quoted at time of service — contact us for personalized service.",
         image: "",
         order: 4,
         extra: { ctaText: "Contact Us", ctaLink: "/contact" },
@@ -98,16 +106,29 @@ Mr. Huffman continued to work helping in the shop until his health declined. The
         content: "Watch our story — over 60 years of trusted heating and air conditioning service in Catawba County.",
         image: "",
         order: 2,
-        extra: { videoUrl: "/videos/about-video.mp4" },
+        extra: {
+          videoUrl: "/videos/about-video.mp4",
+          extraVideos: [...aboutExtraVideos],
+        },
+      },
+      {
+        key: "helpful-videos",
+        title: "Helpful Videos & Information",
+        subtitle: "Tips From Huffman Heating",
+        content:
+          "Short videos with helpful information about your heating and air conditioning system.",
+        image: "",
+        order: 3,
+        extra: { videos: [...helpfulInfoVideos] },
       },
       {
         key: "service-area",
         title: "Service Area",
         subtitle: "Proudly Serving",
         content:
-          "Catawba County, Conover NC, Newton NC, Maiden NC, Taylorsville NC, and Hickory NC.",
+          "Catawba County, Conover NC, Newton NC, Maiden NC, Taylorsville NC, Hickory NC, and Claremont NC.",
         image: "",
-        order: 3,
+        order: 4,
       },
       {
         key: "values",
@@ -116,7 +137,7 @@ Mr. Huffman continued to work helping in the shop until his health declined. The
         content:
           "Quality workmanship, honest pricing, and treating every customer like family — the same values Fred Huffman built this company on over 60 years ago.",
         image: "",
-        order: 4,
+        order: 5,
       },
     ],
   },
@@ -129,7 +150,7 @@ Mr. Huffman continued to work helping in the shop until his health declined. The
         title: "Our Services",
         subtitle: "Complete Heating & Cooling Solutions",
         content:
-          "Specialists in gas, oil & heat pumps with all metal duct work. Residential and commercial sales, service, and installation.",
+          "Specialists in gas, oil & heat pumps with all metal duct work. Residential and light commercial sales, service, and installation.",
         image: "/images/logo.png",
         order: 0,
       },
@@ -184,8 +205,8 @@ Mr. Huffman continued to work helping in the shop until his health declined. The
       {
         key: "hero",
         title: "Contact Us",
-        subtitle: "Get Your Free Estimate Today",
-        content: "Reach out by email, phone, or text. We'd love to hear from you!",
+        subtitle: "Contact Us Today",
+        content: "Free estimates on replacements and new installs. Reach out by email, phone, or text.",
         image: "/images/logo.png",
         order: 0,
       },
@@ -208,7 +229,7 @@ Mr. Huffman continued to work helping in the shop until his health declined. The
         title: "Family Owned & Operated",
         subtitle: "Serving Since 1962",
         content:
-          "Brent Huffman and the Huffman team bring decades of experience and a personal touch to every job. Free estimates on all services.",
+          "Brent Huffman and the Huffman team bring decades of experience and a personal touch to every job. Free estimates on replacements and new installations.",
         image: "/images/team.jpg",
         order: 1,
       },
@@ -225,7 +246,7 @@ export const defaultServices = [
     mainImage: "/images/services/heat-pumps.png",
     icon: "",
     order: 0,
-    features: ["Heat Pump Installation", "Energy Efficient", "Heating & Cooling", "Free Estimates"],
+    features: ["Heat Pump Installation", "Energy Efficient", "Heating & Cooling", "Free Install Estimates"],
     detailSections: [
       {
         key: "overview",
@@ -394,7 +415,7 @@ export const defaultServices = [
         key: "metal-ductwork",
         title: "All Metal Ductwork We Install",
         content:
-          "This is the type of ductwork we install — all metal, custom fabricated and professionally installed. Metal ductwork is durable, easier to keep clean, and built to last.\n\nHuffman Heating specializes in all types of metal ductwork for residential and commercial applications. Contact us for a free estimate.",
+          "This is the type of ductwork we install — all metal, custom fabricated and professionally installed. Metal ductwork is durable, easier to keep clean, and built to last.\n\nHuffman Heating specializes in all types of metal ductwork for residential and light commercial applications. Contact us for a free estimate.",
         image: "/images/services/metal-ductwork.png",
         order: 0,
       },
@@ -495,9 +516,29 @@ export const defaultGalleryCategories: {
         order: 1,
       },
       {
+        url: "/images/gallery/install-goodman-condenser.jpg",
+        caption: "Goodman condenser — new residential install",
+        order: 2,
+      },
+      {
         url: "/images/gallery/install-gas-pack.png",
         caption: "All-in-one gas pack installation",
-        order: 2,
+        order: 3,
+      },
+      {
+        url: "/images/gallery/install-goodman-condenser-stone.jpg",
+        caption: "Goodman condenser — stone veneer home",
+        order: 4,
+      },
+      {
+        url: "/images/gallery/install-indoor-furnace-ductwork.jpg",
+        caption: "Indoor furnace and ductwork installation",
+        order: 5,
+      },
+      {
+        url: "/images/gallery/install-r32-condenser.jpg",
+        caption: "R-32 condenser install — happy customer",
+        order: 6,
       },
     ],
   },
@@ -528,17 +569,20 @@ export const defaultGalleryCategories: {
 export const defaultFAQs = [
   {
     question: "Do you offer free estimates?",
-    answer: "Yes! We offer free estimates on all our services. Contact us by phone, email, or text to schedule yours.",
+    answer:
+      "Yes — we offer free estimates on replacements and new installations. We do not offer free estimates on repairs; repair pricing is provided at the time of service. Contact us by phone, email, or text to schedule.",
     order: 0,
   },
   {
     question: "What areas do you serve?",
-    answer: "We serve Catawba County including Conover, Newton, Maiden, Taylorsville, and Hickory, North Carolina.",
+    answer:
+      "We serve Catawba County including Conover, Newton, Maiden, Taylorsville, Hickory, and Claremont, North Carolina.",
     order: 1,
   },
   {
     question: "What types of heating systems do you install?",
-    answer: "We specialize in gas furnaces, oil furnaces, heat pumps, and all types of metal ductwork for residential and commercial properties.",
+    answer:
+      "We specialize in gas furnaces, oil furnaces, heat pumps, and all types of metal ductwork for residential properties.",
     order: 2,
   },
   {
@@ -552,8 +596,9 @@ export const defaultFAQs = [
     order: 4,
   },
   {
-    question: "Do you provide emergency service?",
-    answer: "Yes, we offer emergency HVAC service. Call us at 828-256-2675 when you need urgent heating or cooling assistance.",
+    question: "Do you offer emergency services?",
+    answer:
+      "Yes — we offer emergency services for our customers. If you need urgent heating or cooling help, call us at 828-256-2675.",
     order: 5,
   },
 ];
