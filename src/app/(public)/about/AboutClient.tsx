@@ -32,7 +32,7 @@ export default function AboutClient({ page }: { page: { sections: PageSection[] 
     [...helpfulInfoVideos];
 
   const milestones = [
-    { year: "1962", event: "Fred D. Huffman founds the company" },
+    { year: "1962", event: "Fred D. Huffman founded the company" },
     { year: "1972", event: "10 years of experience, company growing" },
     { year: "1980", event: "Brent Huffman joins at age 19" },
     { year: "2024", event: "Brent continues the family legacy" },
