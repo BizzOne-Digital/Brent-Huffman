@@ -16,9 +16,9 @@ export function getImageUrl(path: string) {
 export const aboutExtraVideos = ["/videos/video-1.mp4"] as const;
 
 export const helpfulInfoVideos = [
-  "/videos/video-2.mp4",
-  "/videos/video-3.mp4",
   "/videos/video-4.mp4",
+  "/videos/video-3.mp4",
+  "/videos/video-2.mp4",
 ] as const;
 
 export const defaultPages: { slug: string; title: string; sections: PageSection[] }[] = [
