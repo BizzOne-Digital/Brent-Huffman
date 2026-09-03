@@ -337,7 +337,7 @@ export default function ServiceDetailClient({
               <ul className="space-y-4">
                 {[
                   "Free estimates on replacements — we do not offer free estimates on service or repair",
-                  "Special discounts for seniors, military & law enforcement",
+                  "Discounts for seniors, military, law enforcement & first responders (at our discretion)",
                   "Residential and light commercial expertise",
                   "All metal ductwork specialists",
                 ].map((point) => (

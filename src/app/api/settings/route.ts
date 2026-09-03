@@ -11,6 +11,12 @@ export async function GET() {
     let settings = await SiteSettings.findOne();
     if (!settings) {
       settings = await SiteSettings.create({});
+    } else if (!settings.specialOffers?.firstResponders) {
+      settings.specialOffers = {
+        ...settings.specialOffers,
+        firstResponders: "Discount available at time of service at our discretion",
+      };
+      await settings.save();
     }
     return NextResponse.json({ success: true, data: settings });
   } catch (error) {

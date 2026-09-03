@@ -74,8 +74,8 @@ export default function Header({ phone = "828-256-2675" }: HeaderProps) {
         <p className="text-white/90 text-[11px] sm:text-sm font-medium flex items-center justify-center gap-1.5 sm:gap-2 tracking-wide leading-snug">
           <Shield size={13} className="text-white/70 flex-shrink-0 hidden sm:inline" />
           <span className="text-balance">
-            <span className="sm:hidden">Discounts for Seniors, Military &amp; Law Enforcement</span>
-            <span className="hidden sm:inline">Special Discounts for Seniors, Military &amp; Law Enforcement</span>
+            <span className="sm:hidden">Discounts for Seniors, Military, Law Enforcement &amp; First Responders</span>
+            <span className="hidden sm:inline">Special Discounts for Seniors, Military, Law Enforcement &amp; First Responders</span>
           </span>
         </p>
       </div>

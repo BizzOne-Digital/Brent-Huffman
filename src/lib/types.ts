@@ -33,6 +33,7 @@ export interface SpecialOffers {
   seniors: string;
   lawEnforcement: string;
   military: string;
+  firstResponders: string;
 }
 
 export const PAGE_SLUGS = [

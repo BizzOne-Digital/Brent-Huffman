@@ -48,9 +48,10 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
       },
     },
     specialOffers: {
-      seniors: { type: String, default: "Special discount for senior citizens" },
-      lawEnforcement: { type: String, default: "Special discount for law enforcement" },
-      military: { type: String, default: "Special discount for military personnel" },
+      seniors: { type: String, default: "Discount available at time of service at our discretion" },
+      lawEnforcement: { type: String, default: "Discount available at time of service at our discretion" },
+      military: { type: String, default: "Discount available at time of service at our discretion" },
+      firstResponders: { type: String, default: "Discount available at time of service at our discretion" },
     },
     footerText: {
       type: String,

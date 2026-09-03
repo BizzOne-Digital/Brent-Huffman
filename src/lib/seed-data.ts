@@ -58,7 +58,7 @@ export const defaultPages: { slug: string; title: string; sections: PageSection[
         key: "offers",
         title: "Special Offers",
         subtitle: "Exclusive Discounts",
-        content: "We proudly offer special discounts to senior citizens, law enforcement, and military personnel.",
+        content: "We offer discounts at our discretion at time of service for senior citizens, law enforcement, military personnel, and first responders.",
         image: "",
         order: 3,
       },
@@ -587,7 +587,7 @@ export const defaultFAQs = [
   },
   {
     question: "Do you offer discounts?",
-    answer: "Yes, we offer special discounts for senior citizens, law enforcement, and military personnel. Contact us for details.",
+    answer: "Yes, we offer discounts at our discretion at time of service for senior citizens, law enforcement, military personnel, and first responders.",
     order: 3,
   },
   {

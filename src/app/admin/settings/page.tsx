@@ -13,7 +13,7 @@ interface Settings {
   address: string;
   serviceAreas: string[];
   socialLinks: { facebook: string; facebookReel: string; facebookPost: string; googleReview: string };
-  specialOffers: { seniors: string; lawEnforcement: string; military: string };
+  specialOffers: { seniors: string; lawEnforcement: string; military: string; firstResponders: string };
   footerText: string;
   hours: string;
 }
@@ -138,6 +138,7 @@ export default function AdminSettings() {
               { key: "seniors", label: "Senior Citizens Discount" },
               { key: "lawEnforcement", label: "Law Enforcement Discount" },
               { key: "military", label: "Military Discount" },
+              { key: "firstResponders", label: "First Responders Discount" },
             ].map((field) => (
               <div key={field.key}>
                 <label className="admin-label">{field.label}</label>

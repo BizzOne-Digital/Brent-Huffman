@@ -21,6 +21,7 @@ interface FooterProps {
       seniors?: string;
       lawEnforcement?: string;
       military?: string;
+      firstResponders?: string;
     };
   };
 }
@@ -50,7 +51,7 @@ export default function Footer({ settings }: FooterProps) {
       <div className="gradient-red-blue py-3 sm:py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-xs sm:text-sm md:text-base font-semibold tracking-wide text-balance leading-snug">
-            🎖️ Special Discounts for Seniors, Law Enforcement & Military Personnel
+            🎖️ Special Discounts for Seniors, Law Enforcement, Military & First Responders
           </p>
         </div>
       </div>

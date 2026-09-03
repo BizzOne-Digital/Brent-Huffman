@@ -23,7 +23,7 @@ interface HomeClientProps {
   }>;
   settings: {
     phone?: string;
-    specialOffers?: { seniors?: string; lawEnforcement?: string; military?: string };
+    specialOffers?: { seniors?: string; lawEnforcement?: string; military?: string; firstResponders?: string };
   } | null;
 }
 
@@ -310,13 +310,14 @@ export default function HomeClient({ page, services, settings }: HomeClientProps
             </h2>
             <p className="text-white/90 text-base sm:text-xl mb-8 sm:mb-12 max-w-2xl mx-auto">
               {offers?.content ||
-                "We proudly offer special discounts to senior citizens, law enforcement, and military personnel."}
+                "We offer discounts at our discretion at time of service for senior citizens, law enforcement, military personnel, and first responders."}
             </p>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { emoji: "👴", label: "Senior Citizens", desc: settings?.specialOffers?.seniors },
                 { emoji: "👮", label: "Law Enforcement", desc: settings?.specialOffers?.lawEnforcement },
                 { emoji: "🎖️", label: "Military", desc: settings?.specialOffers?.military },
+                { emoji: "🚒", label: "First Responders", desc: settings?.specialOffers?.firstResponders },
               ].map((offer, i) => (
                 <motion.div
                   key={offer.label}
@@ -328,7 +329,7 @@ export default function HomeClient({ page, services, settings }: HomeClientProps
                 >
                   <div className="text-4xl mb-4">{offer.emoji}</div>
                   <h3 className="text-xl font-bold mb-2">{offer.label}</h3>
-                  <p className="text-white/80 text-sm">{offer.desc || "Special discount available"}</p>
+                  <p className="text-white/80 text-sm">{offer.desc || "Discount available at time of service at our discretion"}</p>
                 </motion.div>
               ))}
             </div>
