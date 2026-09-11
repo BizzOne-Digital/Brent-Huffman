@@ -6,6 +6,11 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Share2, Clock } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import GoogleReviewBlock, { DEFAULT_GOOGLE_REVIEW_URL } from "@/components/ui/GoogleReviewBlock";
+import {
+  buildMailtoHref,
+  resolvePublicBusinessAddress,
+  resolvePublicContactEmail,
+} from "@/lib/contact-email";
 
 interface FooterProps {
   settings?: {
@@ -28,7 +33,10 @@ interface FooterProps {
 
 export default function Footer({ settings }: FooterProps) {
   const phone = settings?.phone || "828-256-2675";
-  const email = (settings?.email || "brenthuffman@huffmanheating.net").toLowerCase();
+  const email = resolvePublicContactEmail(settings?.email);
+  const mailtoHref = buildMailtoHref(email, {
+    subject: "Huffman Heating & Air — Website inquiry",
+  });
   const businessName = settings?.businessName || "Huffman Heating & Air Conditioning";
   const facebook = settings?.socialLinks?.facebook || "https://www.facebook.com/share/1C3vvLwWrV/";
   const googleReviewUrl =
@@ -126,7 +134,7 @@ export default function Footer({ settings }: FooterProps) {
               </li>
               <li>
                 <a
-                  href={`mailto:${email}`}
+                  href={mailtoHref}
                   className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors text-sm break-all"
                 >
                   <Mail size={16} className="text-huffman-blue flex-shrink-0" />
@@ -135,7 +143,7 @@ export default function Footer({ settings }: FooterProps) {
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin size={16} className="text-huffman-red flex-shrink-0 mt-0.5" />
-                {settings?.address || "Claremont, North Carolina"}
+                {resolvePublicBusinessAddress(settings?.address)}
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <Clock size={16} className="text-huffman-blue flex-shrink-0 mt-0.5" />

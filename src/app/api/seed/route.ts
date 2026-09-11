@@ -36,11 +36,7 @@ export async function POST() {
       await SiteSettings.create({});
     } else {
       await SiteSettings.updateMany(
-        {
-          email: {
-            $in: ["brentuffman@huffmanheating.net", "brenthuffman@huffmanheating.net"],
-          },
-        },
+        { email: { $regex: /^brentu(ff|f)man@huffmanheating\.net$/i } },
         { $set: { email: "brenthuffman@huffmanheating.net" } }
       );
       await SiteSettings.updateMany(

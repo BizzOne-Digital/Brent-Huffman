@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/mongodb";
 import PageContent from "@/models/PageContent";
 import SiteSettings from "@/models/SiteSettings";
 import ContactClient from "./ContactClient";
+import { resolvePublicBusinessAddress, resolvePublicContactEmail } from "@/lib/contact-email";
 
 async function getContactData() {
   try {
@@ -15,7 +16,8 @@ async function getContactData() {
       settings: settings
         ? {
             ...JSON.parse(JSON.stringify(settings)),
-            email: settings.email?.trim().toLowerCase(),
+            email: resolvePublicContactEmail(settings.email),
+            address: resolvePublicBusinessAddress(settings.address),
             serviceAreas: (() => {
               const areas = [...(settings.serviceAreas || [])];
               if (!areas.includes("Claremont, NC")) areas.push("Claremont, NC");

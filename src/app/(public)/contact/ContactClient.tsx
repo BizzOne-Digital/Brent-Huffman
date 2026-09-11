@@ -9,6 +9,12 @@ import FadeIn from "@/components/ui/FadeIn";
 import Button from "@/components/ui/Button";
 import GoogleReviewBlock, { DEFAULT_GOOGLE_REVIEW_URL } from "@/components/ui/GoogleReviewBlock";
 import { PageSection } from "@/lib/types";
+import {
+  buildGmailComposeUrl,
+  buildMailtoHref,
+  resolvePublicBusinessAddress,
+  resolvePublicContactEmail,
+} from "@/lib/contact-email";
 
 function getSection(sections: PageSection[], key: string) {
   return sections.find((s) => s.key === key);
@@ -30,7 +36,10 @@ export default function ContactClient({
 }) {
   const hero = getSection(page?.sections || [], "hero");
   const phone = settings?.phone || "828-256-2675";
-  const email = (settings?.email || "brenthuffman@huffmanheating.net").toLowerCase();
+  const email = resolvePublicContactEmail(settings?.email);
+  const emailSubject = "Huffman Heating & Air — Website inquiry";
+  const mailtoHref = buildMailtoHref(email, { subject: emailSubject });
+  const gmailHref = buildGmailComposeUrl(email, { subject: emailSubject });
   const googleReviewUrl =
     settings?.socialLinks?.googleReview || DEFAULT_GOOGLE_REVIEW_URL;
 
@@ -79,7 +88,7 @@ export default function ContactClient({
       icon: Mail,
       label: "Email Us",
       value: email,
-      href: `mailto:${email}`,
+      href: mailtoHref,
       color: "text-huffman-red",
       bg: "bg-red-50",
     },
@@ -99,14 +108,29 @@ export default function ContactClient({
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
             {contactMethods.map((method, i) => (
               <FadeIn key={method.label} delay={i * 0.1}>
-                <a
-                  href={method.href}
+                <div
                   className={`flex flex-col items-center p-8 rounded-2xl ${method.bg} card-hover text-center group`}
                 >
-                  <method.icon className={`w-10 h-10 ${method.color} mb-4 group-hover:scale-110 transition-transform`} />
-                  <h3 className="font-bold text-huffman-dark mb-1">{method.label}</h3>
-                  <p className={`font-semibold text-xs sm:text-sm ${method.color} break-all`}>{method.value}</p>
-                </a>
+                  <a href={method.href} className="flex flex-col items-center w-full">
+                    <method.icon className={`w-10 h-10 ${method.color} mb-4 group-hover:scale-110 transition-transform`} />
+                    <h3 className="font-bold text-huffman-dark mb-1">{method.label}</h3>
+                    <p className={`font-semibold text-xs sm:text-sm ${method.color} break-all`}>{method.value}</p>
+                  </a>
+                  {method.label === "Email Us" && (
+                    <p className="text-gray-500 text-xs mt-3 max-w-[220px] leading-snug">
+                      Opens your email app. If nothing happens, use{" "}
+                      <a
+                        href={gmailHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-huffman-blue font-semibold underline underline-offset-2"
+                      >
+                        Gmail on the web
+                      </a>
+                      .
+                    </p>
+                  )}
+                </div>
               </FadeIn>
             ))}
           </div>
@@ -174,7 +198,9 @@ export default function ContactClient({
                     <MapPin className="text-huffman-red flex-shrink-0 mt-1" size={20} />
                     <div>
                       <p className="font-semibold text-huffman-dark">Location</p>
-                      <p className="text-gray-500">{settings?.address || "Claremont, North Carolina"}</p>
+                      <p className="text-gray-500">
+                        {resolvePublicBusinessAddress(settings?.address)}
+                      </p>
                     </div>
                   </div>
                   <div>
