@@ -1,0 +1,49 @@
+import { NextRequest, NextResponse } from "next/server";
+import { connectDB } from "@/lib/mongodb";
+import { requireAuth } from "@/lib/auth";
+import SiteSettings from "@/models/SiteSettings";
+
+export const runtime = "nodejs";
+
+export async function GET() {
+  try {
+    await connectDB();
+    let settings = await SiteSettings.findOne();
+    if (!settings) {
+      settings = await SiteSettings.create({});
+    } else if (!settings.specialOffers?.firstResponders) {
+      settings.specialOffers = {
+        ...settings.specialOffers,
+        firstResponders: "Discount available at time of service at our discretion",
+      };
+      await settings.save();
+    }
+    return NextResponse.json({ success: true, data: settings });
+  } catch (error) {
+    console.error("Settings GET error:", error);
+    return NextResponse.json({ success: false, error: "Failed to fetch settings" }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  const auth = await requireAuth(request);
+  if (!auth) {
+    return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const body = await request.json();
+    if (typeof body.email === "string") {
+      body.email = body.email.trim().toLowerCase();
+    }
+    await connectDB();
+    const settings = await SiteSettings.findOneAndUpdate({}, body, {
+      new: true,
+      upsert: true,
+    });
+    return NextResponse.json({ success: true, data: settings });
+  } catch (error) {
+    console.error("Settings PUT error:", error);
+    return NextResponse.json({ success: false, error: "Failed to update settings" }, { status: 500 });
+  }
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D71920;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#0054A6;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#grad)"/>
+  <rect x="150" y="110" width="100" height="80" rx="8" fill="#e5e7eb"/>
+  <circle cx="175" cy="135" r="12" fill="#d1d5db"/>
+  <polygon points="150,190 200,150 250,190" fill="#d1d5db"/>
+  <text x="200" y="230" text-anchor="middle" fill="#9ca3af" font-family="Arial" font-size="14">Image Placeholder</text>
+</svg>
