@@ -50,6 +50,7 @@ export default function Footer({ settings }: FooterProps) {
     { href: "/team", label: "Our Team" },
     { href: "/testimonials", label: "Testimonials" },
     { href: "/faqs", label: "FAQs" },
+    { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
   ];
 
